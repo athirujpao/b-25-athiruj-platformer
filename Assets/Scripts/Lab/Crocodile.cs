@@ -4,8 +4,46 @@ using UnityEngine;
 
 public class Crocodile : Enemy
 {
+    [SerializeField] private float attackRange;
+    [SerializeField] private Player player;
+
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform bulletSpawnsPoint;
+
+    [SerializeField] private float bulletSpawnTime;
+    [SerializeField] private float bulletTimer;
+
+    private void Update()
+    {
+        bulletTimer -= Time.deltaTime;
+
+        Behavior();
+    }
+    
     public override void Behavior()
     {
-        Debug.Log("Crocodile.Behavior");
+        Vector2 direction = player.transform.position - transform.position;
+        float distance = direction.magnitude;
+
+        if (distance < attackRange) 
+        {
+            Shoot();
+        }
+
+        else if (bulletTimer <= 0) 
+        {
+
+        }
+
+        
+
+
+    }
+
+    private void Shoot()
+    {
+        
+            Instantiate(bullet, bulletSpawnsPoint.position, Quaternion.identity);
+        
     }
 }
