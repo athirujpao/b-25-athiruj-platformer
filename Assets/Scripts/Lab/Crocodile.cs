@@ -18,6 +18,11 @@ public class Crocodile : Enemy
         bulletTimer -= Time.deltaTime;
 
         Behavior();
+
+        if (bulletTimer <= 0)
+        {
+            bulletTimer = bulletSpawnTime;
+        }
     }
     
     public override void Behavior()
@@ -30,10 +35,7 @@ public class Crocodile : Enemy
             Shoot();
         }
 
-        else if (bulletTimer <= 0) 
-        {
-
-        }
+        
 
         
 
@@ -42,8 +44,11 @@ public class Crocodile : Enemy
 
     private void Shoot()
     {
-        
+        if (bulletTimer <= 0)
+        {
             Instantiate(bullet, bulletSpawnsPoint.position, Quaternion.identity);
+        }
+        
         
     }
 }

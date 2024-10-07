@@ -28,7 +28,7 @@ public abstract class Character : MonoBehaviour
     {
         
     }
-    // 
+    
     public void Init(int newHealth)
     {
         Health = newHealth; 

@@ -38,6 +38,6 @@ public class Ant : Enemy
         // 
         Vector2 scale = transform.localScale;
         scale.x *= -1;
-        transform.localScale *= scale;
+        transform.localScale = scale;
     }
 }
