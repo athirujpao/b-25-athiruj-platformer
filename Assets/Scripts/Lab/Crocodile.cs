@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Crocodile : Enemy, IShootable
 {
+
     public float attackRange;
     public  Player player;
 
@@ -12,6 +13,7 @@ public class Crocodile : Enemy, IShootable
 
     [field: SerializeField] public float BulletSpawnTime { get; set; }
     [field: SerializeField] public float BulletTimer { get; set; }
+
 
     
     private void Update()
@@ -25,13 +27,28 @@ public class Crocodile : Enemy, IShootable
             BulletTimer = BulletSpawnTime;
         }
     }
-    
+
+    void Start()
+    {
+        Init(30);
+        BulletTimer = 0.0f;
+        BulletSpawnTime = 5.0f;
+        DamageHit = 30;
+        attackRange = 6;
+        player = GameObject.FindObjectOfType<Player>();
+    }
+    void FixedUpdate()
+    {
+        BulletTimer += Time.fixedDeltaTime;
+        Behavior();
+    }
+
     public override void Behavior()
     {
         Vector2 direction = player.transform.position - transform.position;
         float distance = direction.magnitude;
 
-        if (distance < attackRange) 
+        if (distance <= attackRange) 
         {
             Shoot();
         }
@@ -47,7 +64,11 @@ public class Crocodile : Enemy, IShootable
     {
         if (BulletTimer <= 0)
         {
+
             Instantiate(Bullet, BulletSpawnPoint.position, Quaternion.identity);
+
+            
+            
         }
         
         

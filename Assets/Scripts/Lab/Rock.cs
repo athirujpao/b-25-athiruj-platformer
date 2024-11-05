@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Rock : Weapon
 {
-    //damage 40
+    
     private Rigidbody rb2d;
     private Vector2 force;
 
-    public override void OnHitWithCharacter()
+    public override void OnHitWith(Character character)
     {
 
     }

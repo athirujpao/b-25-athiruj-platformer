@@ -26,4 +26,5 @@ public class Player : Character , IShootable
     {
         Shoot();
     }
+
 }
