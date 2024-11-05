@@ -13,7 +13,7 @@ public class Banana : Weapon
     }
 
     //I don't know we can use this too override(mean the OnHit one). Please let me know if you see this because in the OOP, they said they can only override Move(). TY TA
-    public override void OnHitWithCharacter()
+    public override void OnHitWith(Character character)
     {
        
     }

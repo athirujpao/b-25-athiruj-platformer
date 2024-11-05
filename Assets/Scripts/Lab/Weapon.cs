@@ -5,12 +5,13 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    
     protected string Owner;
 
-    //interface IShootable
+    protected IShootable shooter;
 
     
-    
+    //abstract method 
 
     [SerializeField] private int damage;
     public int Damage
@@ -26,17 +27,31 @@ public abstract class Weapon : MonoBehaviour
 
     }
 
-    public abstract void OnHitWithCharacter();
+    public abstract void OnHitWith(Character character);
     
     
 
     public abstract void Move();
 
-
-    public int GetShootDirection() 
+    public void Init(int _damage,IShootable _owner) 
     {
-        return 1;
+        Damage = _damage;
+        shooter = _owner;
     }
 
 
+    public int GetShootDirection()  // make player can shoot both
+    {
+        float shootDirection = shooter.BulletSpawnPoint.position.x - shooter.BulletSpawnPoint.parent.position.x;
+        if (shootDirection > 0)
+            return 1; // shoot right 
+        else return -1; // shoot left
+            
+        
+    }
+
+    public void OnTriggerEnter2D(Collider2D other) 
+    {
+        OnHitWith(other.GetComponent<Character>());
+    }
 }
