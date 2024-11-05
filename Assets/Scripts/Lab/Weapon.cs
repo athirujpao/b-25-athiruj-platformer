@@ -7,7 +7,7 @@ public abstract class Weapon : MonoBehaviour
 {
     protected string Owner;
 
-    //interface IShootable
+    protected IShootable shooter;
 
     
     
@@ -26,16 +26,27 @@ public abstract class Weapon : MonoBehaviour
 
     }
 
-    public abstract void OnHitWithCharacter();
-    
-    
+    public abstract void OnHitWith(Character character);
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        OnHitWith(other.GetComponent<Character>());
+    }
 
     public abstract void Move();
 
+    public void Init(int _damage, IShootable _owner) 
+    {
+        Damage = _damage;
+        shooter = _owner;
+    }
 
     public int GetShootDirection() 
     {
-        return 1;
+        float shootDirec = shooter.BulletSpawnPoint.position.x - shooter.BulletSpawnPoint.parent.position.x;
+        if (shootDirec > 0)
+            return 1; //right
+        else return -1; //left
     }
 
 

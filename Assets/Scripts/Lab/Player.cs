@@ -2,11 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character
+public class Player : Character, IShootable
 {
-    public void Shoot() 
-    { 
-
-    }
-    public void OnHitWithEnemy() { }
+    
 }
