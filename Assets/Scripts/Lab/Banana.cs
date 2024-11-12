@@ -11,11 +11,19 @@ public class Banana : Weapon
     
     public override void Move()
     {
+
+        
+
+        // s =  v*t
         float newX = transform.position.x + speed * Time.deltaTime;
-        float newY = transform.position.x;
+        float newY = transform.position.y;
         Vector2 newPosi = new Vector2(newX, newY);
-        transform.position = newPosi;
-        Debug.Log("Banana move with constants speed using Tranfrom");
+        transform.position = newPosi; 
+        
+    }
+    private void Update()
+    {
+        Move();
     }
 
     //I don't know we can use this too override(mean the OnHit one). Please let me know if you see this because in the OOP, they said they can only override Move(). TY TA
@@ -26,14 +34,14 @@ public class Banana : Weapon
             character.TakeDamage(Damage);
         }
        Console.WriteLine($"{this.name}: ");
-    }
+    }   
 
     private void Start()
     {
-        Damage = 30;
-        speed = 4;
+        Damage = 10;
+        speed = 4f * GetShootDirection();
         
-        Move();
+
     }
 
 

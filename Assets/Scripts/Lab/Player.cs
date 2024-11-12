@@ -9,18 +9,30 @@ public class Player : Character , IShootable
 
     public float BulletSpawnTime { get; set; }
     public float BulletTimer { get; set; }
+    private void Start()
+    {
+        base.HealthStart();
+        Init(100);
+        
+        
+        
+    }
 
     public void Shoot() 
     {
         // click mouse to shoot 
         if (Input.GetButtonDown("Fire1") && (BulletTimer >= BulletSpawnTime)) 
         {
-            Instantiate(Bullet, BulletSpawnPoint.position,Quaternion.identity );
             
-            BulletTimer = 0;
+            
+            GameObject obj = Instantiate(Bullet, BulletSpawnPoint.position, Quaternion.identity );                                              
+            Banana banana = obj.GetComponent<Banana>();
+            banana.Init(20, this); // Set ownership to this Player instance
+            BulletTimer = 2;
+            
         }
     }
-    public void OnHitWithEnemy() { }
+    
 
     private void Update()
     {

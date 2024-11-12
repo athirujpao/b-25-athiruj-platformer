@@ -21,42 +21,40 @@ public class Crocodile : Enemy, IShootable
         BulletTimer -= Time.deltaTime;
 
         Behavior();
+        
 
-        if (BulletTimer <= 0)
-        {
-            BulletTimer = BulletSpawnTime;
-        }
+        
     }
 
     void Start()
     {
-        Init(30);
+        base.HealthStart();
+        Init(100);
         BulletTimer = 0.0f;
         BulletSpawnTime = 5.0f;
         DamageHit = 30;
         attackRange = 6;
-        player = GameObject.FindObjectOfType<Player>();
+        player = GameObject.FindAnyObjectByType<Player>();
     }
-    void FixedUpdate()
-    {
-        BulletTimer += Time.fixedDeltaTime;
-        Behavior();
-    }
+    
 
     public override void Behavior()
     {
+        // set this because to check if this make it play
+        if (player == null)
+        {
+            Debug.LogWarning("Player has been destroyed, cannot perform ");
+            return; // Exit the method if the player is destroyed
+        }
+
         Vector2 direction = player.transform.position - transform.position;
         float distance = direction.magnitude;
 
-        if (distance <= attackRange) 
+        if (distance <= attackRange && BulletTimer <= 0) 
         {
             Shoot();
+            BulletTimer = BulletSpawnTime; // reset the time after shooting
         }
-
-        
-
-        
-
 
     }
 
@@ -64,10 +62,12 @@ public class Crocodile : Enemy, IShootable
     {
         if (BulletTimer <= 0)
         {
+            anim.SetTrigger("Shoot");
+            GameObject obj = Instantiate(Bullet, BulletSpawnPoint.position, Quaternion.identity);
+            Rock rock = obj.GetComponent<Rock>();
+            rock.Init(30, this);
 
-            Instantiate(Bullet, BulletSpawnPoint.position, Quaternion.identity);
 
-            
             
         }
         
