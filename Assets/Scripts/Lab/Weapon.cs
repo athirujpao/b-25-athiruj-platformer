@@ -23,7 +23,7 @@ public abstract class Weapon : MonoBehaviour
         }
         set
         {
-
+            damage = value;
         }
 
     }
@@ -62,9 +62,12 @@ public abstract class Weapon : MonoBehaviour
          
 
         Character character = other.GetComponent<Character>();
-        
-        
-        OnHitWith(other.GetComponent<Character>());
-        Destroy(other.gameObject, 5f);
+
+
+        if (character != null)  // Check if the other object is a character
+        {
+            OnHitWith(character);  // Apply damage to the character
+            Destroy(gameObject, 0.1f);  // Destroy the weapon itself after a short delay
+        }
     }
 }

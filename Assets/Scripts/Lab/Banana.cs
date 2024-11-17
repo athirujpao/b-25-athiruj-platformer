@@ -7,7 +7,7 @@ public class Banana : Weapon
 {
     //set it on Inspector to 4 and Damage 30
     [SerializeField] private float speed;
-
+    
     
     public override void Move()
     {
@@ -31,8 +31,10 @@ public class Banana : Weapon
     {
         if (character is Enemy)
         {
-            character.TakeDamage(Damage);
 
+            character.TakeDamage(Damage);
+            
+            
         }
        
     }   

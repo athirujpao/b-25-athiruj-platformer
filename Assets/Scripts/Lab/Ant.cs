@@ -9,8 +9,9 @@ public class Ant : Enemy
 
     private void Start() 
     {
-        base.HealthStart();
         
+        base.HealthStart();
+        Init(100);
         
         
     }
@@ -46,13 +47,11 @@ public class Ant : Enemy
     // ant doesn't have weapon to shoot then make check if player hit the ant with collison
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        Player player = collision.gameObject.GetComponent<Player>();
-        if (player != null) 
-        {
-            int damage = 10;  // Amount of damage dealt by the Ant
-            player.TakeDamage(damage);
 
+        Player player = collision.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            player.TakeDamage(10);  // Apply 10 damage to the player when they collide with the ant
             
         }
     }

@@ -15,7 +15,6 @@ public class Player : Character , IShootable
         Init(100);
         
         
-        
     }
 
     public void Shoot() 

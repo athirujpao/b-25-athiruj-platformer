@@ -16,7 +16,13 @@ public abstract class Character : MonoBehaviour
 
     public bool IsDead()
     {
-        return health <= 0;
+        
+        if (health <= 0)
+        {
+            Destroy(gameObject);  // Destroy this GameObject when health is zero or below
+            return true;  // Return true since the object is dead
+        }
+        return false;  // Otherwise, return false
     }
     public void TakeDamage(int damage)
     {
@@ -31,8 +37,11 @@ public abstract class Character : MonoBehaviour
 
     public void Init(int newHealth)
     {
-        healthSlider.maxValue = newHealth;  // Set the slider's maximum value to the character's max health
-  
+        maxHealth = newHealth;      
+        health = newHealth;         
+        healthSlider.maxValue = newHealth;  
+        healthSlider.value = newHealth;
+
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -41,7 +50,7 @@ public abstract class Character : MonoBehaviour
      {
         maxHealth = 100;
         health = maxHealth;
-          
+        UpdateHealthSlider();  
         
      }
 
@@ -52,6 +61,6 @@ public abstract class Character : MonoBehaviour
         
             healthSlider.maxValue = maxHealth;
             healthSlider.value = health;
-            
+        
     }
 }
