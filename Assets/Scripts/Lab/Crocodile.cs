@@ -21,9 +21,10 @@ public class Crocodile : Enemy, IShootable
         BulletTimer -= Time.deltaTime;
 
         Behavior();
-        
 
-        
+        UpdateHealthSlider();
+
+
     }
 
     void Start()
@@ -40,11 +41,10 @@ public class Crocodile : Enemy, IShootable
 
     public override void Behavior()
     {
-        // set this because to check if this make it play
         if (player == null)
         {
-            Debug.LogWarning("Player has been destroyed, cannot perform ");
-            return; // Exit the method if the player is destroyed
+            Debug.LogWarning("Player has been destroyed, skipping behavior.");
+            return; // Prevent further execution if the player is destroyed
         }
 
         Vector2 direction = player.transform.position - transform.position;

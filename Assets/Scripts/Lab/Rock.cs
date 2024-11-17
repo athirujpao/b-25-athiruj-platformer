@@ -10,21 +10,21 @@ public class Rock : Weapon
 
     public override void OnHitWith(Character character)
     {
-        if (character is Player) return;
-        character.TakeDamage(Damage);
+        if (character is Player) { character.TakeDamage(Damage);  }
+        //character.TakeDamage(Damage);
     }
 
     public override void Move() 
     {
         
-        rb2d.velocity = new Vector2(GetShootDirection() * 20, rb2d.velocity.y);
+        rb2d.velocity = new Vector2(GetShootDirection() * 5, rb2d.velocity.y);
         
     }
     private void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         Damage = 20;
-        force = new Vector2 (GetShootDirection() * 1, 100);
+        force = new Vector2 (GetShootDirection() * 1, 1);
         Move();
     }
 }

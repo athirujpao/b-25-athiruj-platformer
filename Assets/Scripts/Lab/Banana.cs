@@ -11,7 +11,6 @@ public class Banana : Weapon
     
     public override void Move()
     {
-
         
 
         // s =  v*t
@@ -23,6 +22,7 @@ public class Banana : Weapon
     }
     private void Update()
     {
+        
         Move();
     }
 
@@ -32,14 +32,15 @@ public class Banana : Weapon
         if (character is Enemy)
         {
             character.TakeDamage(Damage);
+
         }
-       Console.WriteLine($"{this.name}: ");
+       
     }   
 
-    private void Start()
+    void Start()
     {
-        Damage = 10;
-        speed = 4f * GetShootDirection();
+        Damage = 30;
+        speed = 4f + GetShootDirection();
         
 
     }

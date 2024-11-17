@@ -25,7 +25,9 @@ public class Player : Character , IShootable
         {
             
             
-            GameObject obj = Instantiate(Bullet, BulletSpawnPoint.position, Quaternion.identity );                                              
+            GameObject obj = Instantiate(Bullet, BulletSpawnPoint.position, Quaternion.identity );
+            
+
             Banana banana = obj.GetComponent<Banana>();
             banana.Init(20, this); // Set ownership to this Player instance
             BulletTimer = 2;
@@ -36,6 +38,7 @@ public class Player : Character , IShootable
 
     private void Update()
     {
+        UpdateHealthSlider();
         Shoot();
     }
 

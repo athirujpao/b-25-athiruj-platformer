@@ -10,12 +10,13 @@ public class Ant : Enemy
     private void Start() 
     {
         base.HealthStart();
-        Init(100);
+        
         
         
     }
     private void FixedUpdate()
     {
+        UpdateHealthSlider();
         Behavior();
     }
     public override void Behavior()
@@ -36,9 +37,23 @@ public class Ant : Enemy
     {
         velocity *= -1;
 
-        // 
+        
         Vector2 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    // ant doesn't have weapon to shoot then make check if player hit the ant with collison
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        Player player = collision.gameObject.GetComponent<Player>();
+        if (player != null) 
+        {
+            int damage = 10;  // Amount of damage dealt by the Ant
+            player.TakeDamage(damage);
+
+            
+        }
     }
 }

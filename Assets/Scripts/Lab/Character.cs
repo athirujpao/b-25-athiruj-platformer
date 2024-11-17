@@ -20,48 +20,38 @@ public abstract class Character : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+
         health -= damage;
         
-        Debug.Log($"{this.name} took {damage} damage; has {health} left");
-
         UpdateHealthSlider();
 
-
-        if (IsDead())
-        {
-            Debug.Log($"{this.name} has died!");  // Debug statement for when character dies
-        }
+        IsDead();   
+        
     }
 
     public void Init(int newHealth)
     {
-        maxHealth = newHealth; 
-        health = newHealth;
-
-        
-            healthSlider.maxValue = newHealth;  // Set the slider's maximum value to the character's max health
-            healthSlider.value = newHealth;     // Set current value to be full at the start
-        
-
-
-
+        healthSlider.maxValue = newHealth;  // Set the slider's maximum value to the character's max health
+  
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
      protected virtual void HealthStart()
-    {
-        Init(health);
-        UpdateHealthSlider();  // Make sure the health bar starts fully filled
-    }
+     {
+        maxHealth = 100;
+        health = maxHealth;
+          
+        
+     }
 
 
     // Method to update the health slider UI
-    private void UpdateHealthSlider()
+    public void UpdateHealthSlider()
     {
-
-        healthSlider.maxValue = maxHealth;  // Ensure max value is always up-to-date
-        healthSlider.value = health;  // Update the slider to reflect the current health
-        Debug.Log($" {this.name} Has health left {health}");
+        
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = health;
+            
     }
 }

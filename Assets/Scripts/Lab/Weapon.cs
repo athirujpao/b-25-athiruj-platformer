@@ -34,10 +34,10 @@ public abstract class Weapon : MonoBehaviour
 
     public abstract void Move();
 
-    public void Init(int _damage,IShootable _owner) 
+    public void Init(int damage,IShootable Owner) 
     {
-        Damage = _damage;
-        shooter = _owner;
+        Damage = damage;
+        shooter = Owner;
     }
 
 
@@ -47,7 +47,7 @@ public abstract class Weapon : MonoBehaviour
 
          float shootDirection = shooter.BulletSpawnPoint.position.x - shooter.BulletSpawnPoint.position.x;
 
-         if (shootDirection > 0)
+         if (shootDirection < 0)
 
          return 1; // shoot right 
          else return -1; // shoot left
@@ -58,21 +58,12 @@ public abstract class Weapon : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other) 
     {
-        // i have a problem with the projectile hitting the owner that shoot
+        
+         
+
         Character character = other.GetComponent<Character>();
-
-        // Ensure that we only interact with Character objects
-        if (character == null)
-        {
-            return;
-        }
-
-        // Avoid damaging the owner of the projectile
-        if (shooter != null && character == shooter as Character)
-        {
-            return; // Do nothing if the collided character is the shooter
-        }
-
+        
+        
         OnHitWith(other.GetComponent<Character>());
         Destroy(other.gameObject, 5f);
     }
